@@ -137,7 +137,16 @@ export class Player {
     return false
   }
   isStraight(cards: Array<GameCard>): boolean {
-    return false;
+    cards.sort((a,b)=>parseInt(a.rank)-parseInt(b.rank))
+    let count = 1
+    let index = 0
+    for (const card of cards) {
+      for(let i = index; i < cards.length-1;i++){
+        if(parseInt(card.rank)-parseInt(cards[i+1].rank) === -1) count++
+      }
+    }
+    if(count === 5) return true
+    return false
   }
   isTrips(cards: Array<GameCard>): boolean {
     for (const card of cards) {
