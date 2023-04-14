@@ -20,11 +20,17 @@ export class Player {
     }
     if (this.isFullHouse(allCards) === true) {
       console.log("Fullhouse")
-      betCallback(minRaise + raiseUnit*allCards.length)
+      let raise = minRaise + stack/2
+      if( raise > stack) betCallback(stack)
+      else 
+        betCallback(raise)
     }
     if (this.isFlush(allCards) === true) {
       console.log("Flush")
-      betCallback(minRaise + raiseUnit*allCards.length)
+      let raise = minRaise + stack/2
+      if( raise > stack) betCallback(stack)
+      else 
+        betCallback(raise)
     }
     if (this.isStraight(allCards) === true) {
       console.log("Straight")
@@ -32,7 +38,7 @@ export class Player {
     }
     if (this.isTrips(allCards) === true) {
       console.log("trips")
-      betCallback(minRaise + raiseUnit*allCards.length)
+      betCallback(minRaise + 2*raiseUnit*allCards.length)
     }
     if (this.isTwoPair(allCards) === true) {
       console.log("2pair")
