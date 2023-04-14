@@ -95,10 +95,10 @@ export class Player {
   }
 
   toRank(cardRank: string): number {
-    if (cardRank == "J") return 14;
-    if (cardRank == "Q") return 16;
-    if (cardRank == "K") return 18;
-    if (cardRank == "A") return 20;
+    if (cardRank == "J") return 18;
+    if (cardRank == "Q") return 19;
+    if (cardRank == "K") return 20;
+    if (cardRank == "A") return 21;
     return parseInt(cardRank)
   }
 
@@ -208,7 +208,7 @@ export class Player {
     for (let card of cards) {
       cardValues += this.toRank(card.rank)
     }
-    if (cardValues > 16) return true;
+    if (cardValues > 20) return true;
 
     return false;
   }
