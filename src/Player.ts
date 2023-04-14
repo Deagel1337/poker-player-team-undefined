@@ -1,6 +1,7 @@
 export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
-    const allCards = [...gameState.players[gameState.in_action].hole_cards, ...gameState.community_cards]
+    console.log(gameState.in_action);
+    const allCards = gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards);
     const minRaise = gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
     const stack = gameState.players[gameState.in_action].stack;
     const raiseUnit  = 80;
