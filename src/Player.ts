@@ -35,10 +35,6 @@ export class Player {
         this.bet(raise, "fullhouse-raise", betCallback)
       return;
     }
-    if (stack < 300 && this.isHighCard(ownCards)<20) {
-      this.bet(0, "stack to low", betCallback);
-      return;
-    }
     if (minRaise_stack_percent > 0.5 && activePlayers.length > 4) {
       this.bet(0, "fold too high min bet with more than 4 players", betCallback);
       return;
@@ -69,6 +65,10 @@ export class Player {
     }
     if (this.isPair(allCards, ownCards) > 0) {
       this.bet(minRaise + raiseUnit * allCards.length * this.isPair(allCards, ownCards), "pair", betCallback)
+      return;
+    }
+    if (stack < 300 && this.isHighCard(ownCards) < 20) {
+      this.bet(0, "stack to low", betCallback);
       return;
     }
     if (this.isHighCard(ownCards) > 20) {
@@ -187,7 +187,7 @@ export class Player {
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length == 3) r = 1;
     }
-    if (r > 0 && this.isPair(cards, ownCards)>0) { r = 0.5; }
+    if (r > 0 && this.isPair(cards, ownCards) > 0) { r = 0.5; }
     return r;
   }
 
@@ -204,8 +204,8 @@ export class Player {
     for (const card of ownCards) {
       const possiblePair = cards.filter((c) => c.rank == card.rank)
       if (possiblePair.length == 2) {
-        if(this.isHighCard(cards))
-        return 1
+        if (this.isHighCard(cards))
+          return 1
       }
       return 0.5
     }
