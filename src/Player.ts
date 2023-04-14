@@ -94,7 +94,7 @@ export class Player {
       this.bet(0, "stoploss", betCallback)
       return;
     }
-    this.bet(42, 'N', betCallback)
+    this.bet(call, 'fallback call', betCallback)
     return;
   }
 
