@@ -220,8 +220,10 @@ export class Player {
         const highcard = this.isHighCard(ownCards);
         if (highcard>0)
           return 1
+
+        return 0.5
       }
-      return 0.5
+      
     }
     return 0
   }
