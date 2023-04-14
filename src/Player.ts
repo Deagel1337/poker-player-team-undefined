@@ -2,6 +2,7 @@ export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
     const ownCards = gameState.players[gameState.in_action].hole_cards;
     const allCards = gameState.community_cards.concat(...ownCards);
+    const call = gameState.current_buy_in - gameState.players[gameState.in_action].bet;
     const minRaise = gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
     const stack = gameState.players[gameState.in_action].stack;
     const minRaise_stack_percent = minRaise / stack;
@@ -71,7 +72,7 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length * this.isPair(allCards, ownCards), "pair", betCallback)
       return;
     }
-    if(gameState.current_buy_in - gameState.players[gameState.in_action].bet > 100){
+    if(call > 100){
       this.bet(0, "raise too high", betCallback);
       return;
     }
