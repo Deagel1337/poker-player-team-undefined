@@ -34,7 +34,7 @@ export class Player {
     if (this.isPair(allCards) === true) {
       betCallback(minRaise + 50)
     }
-    if (this.isHighCard(allCards) === true) {
+    if (this.isHighCard(gameState.players[gameState.in_action].hole_cards) === true) {
       betCallback(minRaise + 50)
     }
 
@@ -43,14 +43,7 @@ export class Player {
       betCallback(0)
     }
 
-    let cardValues
-    for (let card of gameState.players[gameState.in_action].hole_cards) {
-      cardValues += this.toRank(card.rank)
-    }
-    if (cardValues > 20)
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise);
 
-    betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet)
   }
 
   public showdown(gameState: {
@@ -123,6 +116,12 @@ export class Player {
     return false
   }
   isHighCard(cards: Array<GameCard>): boolean {
+    let cardValues
+    for (let card of cards) {
+      cardValues += this.toRank(card.rank)
+    }
+    if (cardValues > 20) return true;
+    
     return false;
   }
 };
