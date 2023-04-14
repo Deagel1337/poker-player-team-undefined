@@ -63,7 +63,7 @@ export class Player {
   public showdown(gameState: {
     players: Array<GamePlayer>
   }): void {
-    console.log(gameState)
+    // console.log(gameState)
   }
 
   toRank(cardRank: string): number {
