@@ -35,6 +35,10 @@ export class Player {
         this.bet(raise, "fullhouse-raise", betCallback)
       return;
     }
+    if(minRaise > stack) {
+      this.bet(0, "fold because minraise is higher than stack", betCallback);
+      return;
+    }
     if (minRaise_stack_percent > 0.5 && activePlayers.length > 4) {
       this.bet(0, "fold too high min bet with more than 4 players", betCallback);
       return;
