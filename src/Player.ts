@@ -37,6 +37,9 @@ export class Player {
     if (this.isHighCard(allCards) === true) {
       betCallback(minRaise + 50)
     }
+    if(allCards.length >= 4){
+      betCallback(0)
+    }
 
     let cardValues
     for (let card of gameState.players[gameState.in_action].hole_cards) {
