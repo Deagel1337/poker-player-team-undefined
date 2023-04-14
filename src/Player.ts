@@ -11,7 +11,6 @@ export class Player {
     console.log(`MinRaise: ${minRaise} - Stack: ${stack} - ${minRaise_stack_percent}`)
     console.log(gameState.players[gameState.in_action].hole_cards.map((c) => c.rank))
     console.log(allCards.map((c) => c.rank))
-    //TODO: Other Players all in check
 
     if (this.isRoyalFlush(allCards) === true) {
       this.bet(stack, "ryoal flush", betCallback)
