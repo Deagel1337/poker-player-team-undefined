@@ -169,7 +169,7 @@ export class Player {
     return false
   }
   isHighCard(cards: Array<GameCard>): boolean {
-    let cardValues
+    let cardValues = 0;
     for (let card of cards) {
       cardValues += this.toRank(card.rank)
     }
