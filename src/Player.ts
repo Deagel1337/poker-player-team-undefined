@@ -17,27 +17,26 @@ export class Player {
       this.bet(stack, "quads", betCallback)
     }
     if (this.isFullHouse(allCards) === true) {
-      console.log("Fullhouse")
       let raise = minRaise + stack/2
-      if( raise > stack) betCallback(stack)
+      if( raise > stack){
+        this.bet(stack, "fullhouse", betCallback)
+      }
       else 
-        betCallback(raise)
+        this.bet(raise, "fullhouse-raise", betCallback)
     }
     if (this.isFlush(allCards) === true) {
       console.log("Flush")
       let raise = minRaise + stack/4
       if( raise > stack) betCallback(stack)
       else 
-        betCallback(raise)
-      // this.bet(minRaise + raiseUnit*allCards.length, "fullhouse", betCallback)
+        this.bet(raise, "flush-raise", betCallback)
     }
     if (this.isStraight(allCards) === true) {
       this.bet(minRaise + raiseUnit*allCards.length, "straight", betCallback)
     }
     if (this.isTrips(allCards) === true) {
       console.log("trips")
-      betCallback(minRaise + 2*raiseUnit*allCards.length)
-      // this.bet(minRaise + raiseUnit*allCards.length, "trips", betCallback)
+      this.bet(minRaise + 2*raiseUnit*allCards.length, "trips", betCallback)
     }
     if (this.isTwoPair(allCards) === true) {
       betCallback(minRaise + raiseUnit*allCards.length)
