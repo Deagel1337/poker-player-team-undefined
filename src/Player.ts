@@ -75,6 +75,9 @@ export class Player {
     return false;
   }
   isQuads(cards: Array<GameCard>): boolean {
+    for (const card of cards) {
+      if(cards.filter((c)=>c.rank==card.rank).length >= 4) return true
+    }
     return false;
   }
   isFullHouse(cards: Array<GameCard>): boolean {
