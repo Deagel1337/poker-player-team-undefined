@@ -66,8 +66,8 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length, "2pair", betCallback)
       return;
     }
-    if (this.isPair(ownCards) === true) {
-      this.bet(minRaise + raiseUnit * allCards.length, "pair", betCallback)
+    if (this.isPair(ownCards) > 0) {
+      this.bet(minRaise + raiseUnit * allCards.length * this.isPair(ownCards), "pair", betCallback)
       return;
     }
     if (this.isHighCard(gameState.players[gameState.in_action].hole_cards) === true) {
@@ -198,11 +198,16 @@ export class Player {
     return false
   }
 
-  isPair(cards: Array<GameCard>): boolean {
+  isPair(cards: Array<GameCard>): number {
     for (const card of cards) {
-      if (cards.filter((c) => c.rank == card.rank).length == 2) return true
+      const possiblePair = cards.filter((c) => c.rank == card.rank)
+      if (possiblePair.length == 2) {
+        if(this.isHighCard(cards))
+        return 1
+      }
+      return 0.5
     }
-    return false
+    return 0
   }
 
   isHighCard(cards: Array<GameCard>): boolean {
