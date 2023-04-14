@@ -1,11 +1,11 @@
 export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
-    console.log(gameState.in_action);
     const allCards = gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards);
     const minRaise = gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
     const stack = gameState.players[gameState.in_action].stack;
     const raiseUnit  = 30;
 
+    console.log(gameState.players[gameState.in_action].hole_cards.map((c)=>c.rank))
     console.log(allCards.map((c)=>c.rank))
     if (this.isRoyalFlush(allCards) === true) {
       this.bet(stack, "ryoal flush", betCallback)
