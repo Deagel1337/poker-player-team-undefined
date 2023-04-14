@@ -1,10 +1,4 @@
 export class Player {
-  isPair(cards: Array<GameCard>): boolean {
-    for (const card of cards) {
-      if (cards.filter((c) => c.rank == card.rank).length > 0) return true
-    }
-    return false
-  }
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
     let cardValues
     if (this.isPair(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
@@ -31,6 +25,13 @@ export class Player {
     if (cardRank == "K") return 12;
     if (cardRank == "A") return 13;
     return parseInt(cardRank)
+  }
+
+  isPair(cards: Array<GameCard>): boolean {
+    for (const card of cards) {
+      if (cards.filter((c) => c.rank == card.rank).length > 0) return true
+    }
+    return false
   }
 };
 
