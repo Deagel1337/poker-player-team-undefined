@@ -80,6 +80,10 @@ export class Player {
       this.bet(0, "stack to low", betCallback);
       return;
     }
+    if (this.isLowCard(ownCards)) {
+      this.bet(0, "low card", betCallback);
+      return;
+    }
     if(stack > 1400){
       this.bet(0, "stack higher than the risk", betCallback);
       return;
@@ -242,6 +246,15 @@ export class Player {
     if (cardValues > 20) return cardValues;
 
     return cardValues;
+  }
+
+  isLowCard(cards: Array<GameCard>): boolean {
+    let cardValues = 0;
+    for (let card of cards) {
+      cardValues += this.toRank(card.rank)
+    }
+    if (cardValues < 10) return true;
+    return false;
   }
 };
 
