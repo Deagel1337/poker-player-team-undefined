@@ -27,11 +27,39 @@ export class Player {
     return parseInt(cardRank)
   }
 
+
+  isRoyalFlush(cards: Array<GameCard>): boolean {
+    return false;
+  }
+  isStraightFlush(cards: Array<GameCard>): boolean {
+    return false;
+  }
+  isQuads(cards: Array<GameCard>): boolean {
+    return false;
+  }
+  isFullHouse(cards: Array<GameCard>): boolean {
+    return false;
+  }
+  isFlush(cards: Array<GameCard>): boolean {
+    return false;
+  }
+  isStraight(cards: Array<GameCard>): boolean {
+    return false;
+  }
+  isTrips(cards: Array<GameCard>): boolean {
+    return false;
+  }
+  isTwoPair(cards: Array<GameCard>): boolean {
+    return false;
+  }
   isPair(cards: Array<GameCard>): boolean {
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length > 0) return true
     }
     return false
+  }
+  isHighCard(cards: Array<GameCard>): boolean {
+    return false;
   }
 };
 
