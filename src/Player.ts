@@ -8,7 +8,7 @@ export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
     let cardValues
     if (this.isPair(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 5)
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
     }
     for (let card of gameState.players[gameState.in_action].hole_cards) {
       cardValues += this.toRank(card.rank)
