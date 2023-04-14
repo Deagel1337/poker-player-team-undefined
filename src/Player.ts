@@ -1,14 +1,30 @@
 export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
-    betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise);
-  }
+    let cardValues
+        for (let card of gameState.players[gameState.in_action].hole_cards) {
+            cardValues += this.toRank(card.rank)
+        }
+        if(cardValues > 20)
+          betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise);
+        
+        betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+    }
 
   public showdown(gameState: {
     players: Array<GamePlayer>
   }): void {
     console.log(gameState)
   }
+
+  toRank(cardRank: string): number {
+    if(cardRank == "J") return 10;
+    if(cardRank == "Q") return 11;
+    if(cardRank == "K") return 12;
+    if(cardRank == "A") return 13;
+    return parseInt(cardRank)
+}
 };
+
 
 export default Player;
 
