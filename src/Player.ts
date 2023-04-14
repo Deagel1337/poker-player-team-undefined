@@ -1,7 +1,34 @@
 export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
     let cardValues
-    if (this.isPair(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+    if (this.isRoyalFlush(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+    }
+    if (this.isStraightFlush(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+    }
+    if (this.isQuads(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+    }
+    if (this.isFullHouse(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+    }
+    if (this.isFlush(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+    }
+    if (this.isStraight(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+    }
+    if (this.isTrips(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+    }
+    if (this.isTwoPair(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+    }
+    if (this.isTrips(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
+      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+    }
+    if (this.isHighCard(gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards)) === true) {
       betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
     }
     for (let card of gameState.players[gameState.in_action].hole_cards) {
