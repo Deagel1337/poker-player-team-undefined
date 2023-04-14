@@ -235,7 +235,7 @@ export class Player {
           return 1
         }
 
-        return 0.5
+        return 0.75
       }
       
     }
