@@ -7,7 +7,7 @@ export class Player {
     const stack = gameState.players[gameState.in_action].stack;
     const minRaise_stack_percent = minRaise / stack;
     const activePlayers = gameState.players.filter((p) => p.status == "active");
-    const raiseUnit = 20;
+    const raiseUnit = 30;
 
 
     console.log(`MinRaise: ${minRaise} - Stack: ${stack} - ${minRaise_stack_percent}`)
@@ -253,7 +253,7 @@ export class Player {
     for (let card of cards) {
       cardValues += this.toRank(card.rank)
     }
-    if (cardValues < 10) return true;
+    if (cardValues < 15) return true;
     return false;
   }
 };
