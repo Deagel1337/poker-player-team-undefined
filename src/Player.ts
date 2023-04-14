@@ -35,7 +35,7 @@ export class Player {
         this.bet(raise, "fullhouse-raise", betCallback)
       return;
     }
-    if (stack < 300) {
+    if (stack < 300 && this.isHighCard(ownCards)<20) {
       this.bet(0, "stack to low", betCallback);
       return;
     }
@@ -71,7 +71,7 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length * this.isPair(allCards, ownCards), "pair", betCallback)
       return;
     }
-    if (this.isHighCard(gameState.players[gameState.in_action].hole_cards) === true) {
+    if (this.isHighCard(ownCards) > 20) {
       this.bet(minRaise + raiseUnit * allCards.length, "highcard", betCallback)
       return;
     }
@@ -212,14 +212,14 @@ export class Player {
     return 0
   }
 
-  isHighCard(cards: Array<GameCard>): boolean {
+  isHighCard(cards: Array<GameCard>): number {
     let cardValues = 0;
     for (let card of cards) {
       cardValues += this.toRank(card.rank)
     }
-    if (cardValues > 20) return true;
+    if (cardValues > 20) return cardValues;
 
-    return false;
+    return cardValues;
   }
 };
 
