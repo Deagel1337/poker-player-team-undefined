@@ -5,6 +5,7 @@ export class Player {
     const stack = gameState.players[gameState.in_action].stack;
     const raiseUnit  = 80;
 
+    betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise)
     console.log(allCards.map((c)=>c.rank))
     if (this.isRoyalFlush(allCards) === true) {
       this.bet(stack, "ryoal flush", betCallback)
