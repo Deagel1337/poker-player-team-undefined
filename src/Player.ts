@@ -91,10 +91,7 @@ export class Player {
       this.bet(0, "low card", betCallback);
       return;
     }
-    if(stack > 1400){
-      this.bet(0, "stack higher than the risk", betCallback);
-      return;
-    }
+
 
     if(allCards.length >=5){
       this.bet(0, "only highcard", betCallback)
