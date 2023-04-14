@@ -66,7 +66,7 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length, "2pair", betCallback)
       return;
     }
-    if (this.isPair(allCards) === true) {
+    if (this.isPair(ownCards) === true) {
       this.bet(minRaise + raiseUnit * allCards.length, "pair", betCallback)
       return;
     }
