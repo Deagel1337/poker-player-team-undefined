@@ -58,7 +58,7 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length, "straight", betCallback)
       return;
     }
-    if (this.isTrips(allCards) === true) {
+    if (this.isTrips(ownCards, allCards) === true) {
       this.bet(minRaise + 2 * raiseUnit * allCards.length, "trips", betCallback)
       return;
     }
@@ -181,7 +181,8 @@ export class Player {
     return false
   }
 
-  isTrips(cards: Array<GameCard>): boolean {
+  isTrips(ownCards: Array<GameCard>, cards: Array<GameCard>): boolean {
+    if (!this.isPair(ownCards)) { return false; }
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length == 3) return true;
     }
