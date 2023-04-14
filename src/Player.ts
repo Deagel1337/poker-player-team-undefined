@@ -37,6 +37,8 @@ export class Player {
     if (this.isHighCard(allCards) === true) {
       betCallback(minRaise + 50)
     }
+
+    //Stop losses b/c royal recognition is not implemented
     if(allCards.length >= 4){
       betCallback(0)
     }
