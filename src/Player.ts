@@ -4,7 +4,7 @@ export class Player {
     const allCards = gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards);
     const minRaise = gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
     const stack = gameState.players[gameState.in_action].stack;
-    const raiseUnit  = 80;
+    const raiseUnit  = 30;
 
     console.log(allCards.map((c)=>c.rank))
     if (this.isRoyalFlush(allCards) === true) {
