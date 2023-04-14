@@ -67,7 +67,7 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length, "2pair", betCallback)
       return;
     }
-    if (this.isPair(ownCards) > 0) {
+    if (this.isPair(allCards, ownCards) > 0) {
       this.bet(minRaise + raiseUnit * allCards.length * this.isPair(ownCards), "pair", betCallback)
       return;
     }
@@ -200,8 +200,8 @@ export class Player {
     return false
   }
 
-  isPair(cards: Array<GameCard>): number {
-    for (const card of cards) {
+  isPair(cards: Array<GameCard>, ownCards: Array<GameCard>): number {
+    for (const card of ownCards) {
       const possiblePair = cards.filter((c) => c.rank == card.rank)
       if (possiblePair.length == 2) {
         if(this.isHighCard(cards))
