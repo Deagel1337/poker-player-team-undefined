@@ -160,7 +160,7 @@ export class Player {
     for (let card of cards) {
       cardValues += this.toRank(card.rank)
     }
-    if (cardValues > 20) return true;
+    if (cardValues > 10) return true;
     
     return false;
   }
