@@ -79,7 +79,12 @@ export class Player {
     return false;
   }
   isTwoPair(cards: Array<GameCard>): boolean {
-    return false;
+    let pairs = 0;
+    for (const card of cards) {
+      if (cards.filter((c) => c.rank == card.rank).length > 0) { pairs++; }
+      if (pairs > 1) { return true }
+    }
+    return false
   }
   isPair(cards: Array<GameCard>): boolean {
     for (const card of cards) {
