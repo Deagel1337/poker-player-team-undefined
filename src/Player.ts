@@ -27,7 +27,7 @@ export class Player {
       return;
     }
     if (this.isFullHouse(allCards) === true) {
-      let raise = minRaise + stack / 2
+      let raise = call + stack / 2
       if (raise > stack) {
         this.bet(stack, "fullhouse", betCallback)
         return;
@@ -36,8 +36,8 @@ export class Player {
         this.bet(raise, "fullhouse-raise", betCallback)
       return;
     }
-    if(minRaise > stack) {
-      this.bet(0, "fold because minraise is higher than stack", betCallback);
+    if(call > stack) {
+      this.bet(0, "fold because call is higher than stack", betCallback);
       return;
     }
     if (minRaise_stack_percent > 0.5 && activePlayers.length > 4) {
@@ -45,7 +45,7 @@ export class Player {
       return;
     }
     if (this.isFlush(allCards) === true) {
-      let raise = minRaise + stack / 4
+      let raise = call + stack / 4
       if (raise > stack) {
         betCallback(stack);
         return;
