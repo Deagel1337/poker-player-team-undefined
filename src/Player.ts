@@ -102,7 +102,6 @@ export class Player {
     return parseInt(cardRank)
   }
 
-
   isRoyalFlush(cards: Array<GameCard>): boolean {
     cards.sort((a, b) => parseInt(a.rank) - parseInt(b.rank))
     if (this.isStraightFlush(cards)) {
@@ -110,6 +109,7 @@ export class Player {
     }
     return false
   }
+
   isStraightFlush(cards: Array<GameCard>): boolean {
     cards.sort((a, b) => parseInt(a.rank) - parseInt(b.rank))
     let isStraight: boolean = false
@@ -132,12 +132,14 @@ export class Player {
     if (count === 5) return true
     return false
   }
+
   isQuads(cards: Array<GameCard>): boolean {
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length >= 4) return true
     }
     return false;
   }
+
   isFullHouse(cards: Array<GameCard>): boolean {
     if (cards.length < 5) return;
     // find triple
@@ -157,12 +159,14 @@ export class Player {
     //find pair
     return false
   }
+
   isFlush(cards: Array<GameCard>): boolean {
     for (const card of cards) {
       if (cards.filter((c) => card.suit === c.suit).length === 5) return true
     }
     return false
   }
+
   isStraight(cards: Array<GameCard>): boolean {
     cards.sort((a, b) => parseInt(a.rank) - parseInt(b.rank))
     let count = 1
@@ -175,12 +179,14 @@ export class Player {
     if (count === 5) return true
     return false
   }
+
   isTrips(cards: Array<GameCard>): boolean {
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length == 3) return true;
     }
     return false;
   }
+
   isTwoPair(cards: Array<GameCard>): boolean {
     let pairs = new Array<string>();
     for (const card of cards) {
@@ -189,12 +195,14 @@ export class Player {
     }
     return false
   }
+
   isPair(cards: Array<GameCard>): boolean {
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length == 2) return true
     }
     return false
   }
+
   isHighCard(cards: Array<GameCard>): boolean {
     let cardValues = 0;
     for (let card of cards) {
