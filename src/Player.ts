@@ -1,35 +1,41 @@
 export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
     const allCards = gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards);
+    const minRaise = gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
+    const stack = gameState.players[gameState.in_action].stack;
+
     if (this.isRoyalFlush(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+      betCallback(stack)
     }
     if (this.isStraightFlush(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+      betCallback(stack)
     }
     if (this.isQuads(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
-    } 
+      betCallback(stack)
+    }
     if (this.isFullHouse(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+      betCallback(minRaise + 50)
     }
     if (this.isFlush(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+      betCallback(minRaise + 50)
     }
     if (this.isStraight(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+      betCallback(minRaise + 50)
     }
     if (this.isTrips(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+      betCallback(minRaise + 50)
     }
     if (this.isTwoPair(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+      betCallback(minRaise + 50)
     }
     if (this.isTrips(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+      betCallback(minRaise + 50)
+    }
+    if (this.isPair(allCards) === true) {
+      betCallback(minRaise + 50)
     }
     if (this.isHighCard(allCards) === true) {
-      betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
+      betCallback(minRaise + 50)
     }
 
     let cardValues
