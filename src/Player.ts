@@ -103,6 +103,9 @@ export class Player {
     return false;
   }
   isTrips(cards: Array<GameCard>): boolean {
+    for (const card of cards) {
+      if (cards.filter((c) => c.rank == card.rank).length == 3) return true;
+    }
     return false;
   }
   isTwoPair(cards: Array<GameCard>): boolean {
