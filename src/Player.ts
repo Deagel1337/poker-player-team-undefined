@@ -79,8 +79,12 @@ export class Player {
 
 
   isRoyalFlush(cards: Array<GameCard>): boolean {
-    return false;
-  }
+    cards.sort((a,b)=>parseInt(a.rank)-parseInt(b.rank))
+    if(this.isStraightFlush(cards)) {
+      if(cards[0].rank == "10") return true
+    }
+    return false
+    }
   isStraightFlush(cards: Array<GameCard>): boolean {
     cards.sort((a,b)=>parseInt(a.rank)-parseInt(b.rank))
   let isStraight: boolean = false
