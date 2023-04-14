@@ -5,9 +5,10 @@ export class Player {
     const stack = gameState.players[gameState.in_action].stack;
     const minRaise_stack_percent = minRaise / stack;
     const activePlayers = gameState.players.filter((p) => p.status == "active");
-    const raiseUnit = 30;
+    const raiseUnit = 10;
 
 
+    console.log(`MinRaise: ${minRaise} - Stack: ${stack} - ${minRaise_stack_percent}`)
     console.log(gameState.players[gameState.in_action].hole_cards.map((c) => c.rank))
     console.log(allCards.map((c) => c.rank))
 
@@ -31,6 +32,10 @@ export class Player {
       }
       else
         this.bet(raise, "fullhouse-raise", betCallback)
+      return;
+    }
+    if (stack < 300) {
+      this.bet(0, "stack to low", betCallback);
       return;
     }
     if (minRaise_stack_percent > 0.5 && activePlayers.length > 4) {
@@ -57,7 +62,6 @@ export class Player {
       return;
     }
     if (this.isTwoPair(allCards) === true) {
-      betCallback(minRaise + raiseUnit * allCards.length)
       this.bet(minRaise + raiseUnit * allCards.length, "2pair", betCallback)
       return;
     }
@@ -98,7 +102,6 @@ export class Player {
     return parseInt(cardRank)
   }
 
-
   isRoyalFlush(cards: Array<GameCard>): boolean {
     cards.sort((a, b) => parseInt(a.rank) - parseInt(b.rank))
     if (this.isStraightFlush(cards)) {
@@ -106,6 +109,7 @@ export class Player {
     }
     return false
   }
+
   isStraightFlush(cards: Array<GameCard>): boolean {
     cards.sort((a, b) => parseInt(a.rank) - parseInt(b.rank))
     let isStraight: boolean = false
@@ -128,12 +132,14 @@ export class Player {
     if (count === 5) return true
     return false
   }
+
   isQuads(cards: Array<GameCard>): boolean {
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length >= 4) return true
     }
     return false;
   }
+
   isFullHouse(cards: Array<GameCard>): boolean {
     if (cards.length < 5) return;
     // find triple
@@ -153,12 +159,14 @@ export class Player {
     //find pair
     return false
   }
+
   isFlush(cards: Array<GameCard>): boolean {
     for (const card of cards) {
       if (cards.filter((c) => card.suit === c.suit).length === 5) return true
     }
     return false
   }
+
   isStraight(cards: Array<GameCard>): boolean {
     cards.sort((a, b) => parseInt(a.rank) - parseInt(b.rank))
     let count = 1
@@ -171,12 +179,14 @@ export class Player {
     if (count === 5) return true
     return false
   }
+
   isTrips(cards: Array<GameCard>): boolean {
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length == 3) return true;
     }
     return false;
   }
+
   isTwoPair(cards: Array<GameCard>): boolean {
     let pairs = new Array<string>();
     for (const card of cards) {
@@ -185,12 +195,14 @@ export class Player {
     }
     return false
   }
+
   isPair(cards: Array<GameCard>): boolean {
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length == 2) return true
     }
     return false
   }
+
   isHighCard(cards: Array<GameCard>): boolean {
     let cardValues = 0;
     for (let card of cards) {
