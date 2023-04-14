@@ -3,10 +3,10 @@ export class Player {
     const allCards = gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards);
     const minRaise = gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
     const stack = gameState.players[gameState.in_action].stack;
-    const raiseUnit  = 30;
+    const raiseUnit = 30;
 
-    console.log(gameState.players[gameState.in_action].hole_cards.map((c)=>c.rank))
-    console.log(allCards.map((c)=>c.rank))
+    console.log(gameState.players[gameState.in_action].hole_cards.map((c) => c.rank))
+    console.log(allCards.map((c) => c.rank))
     if (this.isRoyalFlush(allCards) === true) {
       this.bet(stack, "ryoal flush", betCallback)
     }
@@ -17,45 +17,46 @@ export class Player {
       this.bet(stack, "quads", betCallback)
     }
     if (this.isFullHouse(allCards) === true) {
-      let raise = minRaise + stack/2
-      if( raise > stack){
+      let raise = minRaise + stack / 2
+      if (raise > stack) {
         this.bet(stack, "fullhouse", betCallback)
       }
-      else 
+      else
         this.bet(raise, "fullhouse-raise", betCallback)
     }
     if (this.isFlush(allCards) === true) {
       console.log("Flush")
-      let raise = minRaise + stack/4
-      if( raise > stack) betCallback(stack)
-      else 
+      let raise = minRaise + stack / 4
+      if (raise > stack) betCallback(stack)
+      else
         this.bet(raise, "flush-raise", betCallback)
     }
     if (this.isStraight(allCards) === true) {
-      this.bet(minRaise + raiseUnit*allCards.length, "straight", betCallback)
+      this.bet(minRaise + raiseUnit * allCards.length, "straight", betCallback)
     }
     if (this.isTrips(allCards) === true) {
       console.log("trips")
-      this.bet(minRaise + 2*raiseUnit*allCards.length, "trips", betCallback)
+      this.bet(minRaise + 2 * raiseUnit * allCards.length, "trips", betCallback)
     }
     if (this.isTwoPair(allCards) === true) {
-      betCallback(minRaise + raiseUnit*allCards.length)
-      this.bet(minRaise + raiseUnit*allCards.length, "2pair", betCallback)
+      betCallback(minRaise + raiseUnit * allCards.length)
+      this.bet(minRaise + raiseUnit * allCards.length, "2pair", betCallback)
     }
     if (this.isPair(allCards) === true) {
-      this.bet(minRaise + raiseUnit*allCards.length, "pair", betCallback)
+      this.bet(minRaise + raiseUnit * allCards.length, "pair", betCallback)
     }
     if (this.isHighCard(gameState.players[gameState.in_action].hole_cards) === true) {
-      this.bet(minRaise + raiseUnit*allCards.length, "highcard", betCallback)
+      this.bet(minRaise + raiseUnit * allCards.length, "highcard", betCallback)
     }
 
     //Stop losses b/c royal recognition is not implemented
-    if(allCards.length >= 4){
-     this.bet(0, "stoploss", betCallback)
+    if (allCards.length >= 4) {
+      this.bet(0, "stoploss", betCallback)
     }
+    this.bet(42, 'N', betCallback)
   }
 
-  private bet(bet: number, reason: string, betCallback: (bet: number) => void): void{
+  private bet(bet: number, reason: string, betCallback: (bet: number) => void): void {
     console.log(`Bet: ${bet} - Reason: ${reason}`);
     betCallback(bet);
   }
@@ -67,64 +68,63 @@ export class Player {
   }
 
   toRank(cardRank: string): number {
-    if (cardRank == "J") return 10*2;
-    if (cardRank == "Q") return 11*2;
-    if (cardRank == "K") return 12*2;
-    if (cardRank == "A") return 13*2;
+    if (cardRank == "J") return 10 * 2;
+    if (cardRank == "Q") return 11 * 2;
+    if (cardRank == "K") return 12 * 2;
+    if (cardRank == "A") return 13 * 2;
     return parseInt(cardRank)
   }
 
 
   isRoyalFlush(cards: Array<GameCard>): boolean {
-    cards.sort((a,b)=>parseInt(a.rank)-parseInt(b.rank))
-    if(this.isStraightFlush(cards)) {
-      if(cards[0].rank == "10") return true
+    cards.sort((a, b) => parseInt(a.rank) - parseInt(b.rank))
+    if (this.isStraightFlush(cards)) {
+      if (cards[0].rank == "10") return true
     }
     return false
-    }
-  isStraightFlush(cards: Array<GameCard>): boolean {
-    cards.sort((a,b)=>parseInt(a.rank)-parseInt(b.rank))
-  let isStraight: boolean = false
-  for (const card of cards) {
-    if(cards.filter((c)=> card.suit === c.suit).length === 5){
-      isStraight = true
-    }
   }
-  if(!isStraight) return false
-  let count = 1
-  let index = 0
-  for (const card of cards) {
-    for(let i = index; i < cards.length-1;i++)
-    {
-      if((parseInt(card.rank)-parseInt(cards[i+1].rank)) === -1){
-        count++
+  isStraightFlush(cards: Array<GameCard>): boolean {
+    cards.sort((a, b) => parseInt(a.rank) - parseInt(b.rank))
+    let isStraight: boolean = false
+    for (const card of cards) {
+      if (cards.filter((c) => card.suit === c.suit).length === 5) {
+        isStraight = true
       }
     }
-    index++
-  }
-  if(count===5) return true
-  return false
+    if (!isStraight) return false
+    let count = 1
+    let index = 0
+    for (const card of cards) {
+      for (let i = index; i < cards.length - 1; i++) {
+        if ((parseInt(card.rank) - parseInt(cards[i + 1].rank)) === -1) {
+          count++
+        }
+      }
+      index++
+    }
+    if (count === 5) return true
+    return false
   }
   isQuads(cards: Array<GameCard>): boolean {
     for (const card of cards) {
-      if(cards.filter((c)=>c.rank==card.rank).length >= 4) return true
+      if (cards.filter((c) => c.rank == card.rank).length >= 4) return true
     }
     return false;
   }
   isFullHouse(cards: Array<GameCard>): boolean {
-    if(cards.length < 5) return;
-  // find triple
+    if (cards.length < 5) return;
+    // find triple
     let triple;
     for (const card of cards) {
       let possibleTriple = cards.filter((c) => c.rank == card.rank)
-      if(possibleTriple.length == 3){
+      if (possibleTriple.length == 3) {
         triple = possibleTriple;
       }
     }
-    if(!triple) return false;
+    if (!triple) return false;
     for (const card of cards) {
-      if(card.rank == triple[0].rank) continue;
-      if(cards.filter((c) => c.rank == card.rank).length == 2)
+      if (card.rank == triple[0].rank) continue;
+      if (cards.filter((c) => c.rank == card.rank).length == 2)
         return true;
     }
     //find pair
@@ -132,20 +132,20 @@ export class Player {
   }
   isFlush(cards: Array<GameCard>): boolean {
     for (const card of cards) {
-      if(cards.filter((c)=> card.suit === c.suit).length === 5) return true
+      if (cards.filter((c) => card.suit === c.suit).length === 5) return true
     }
     return false
   }
   isStraight(cards: Array<GameCard>): boolean {
-    cards.sort((a,b)=>parseInt(a.rank)-parseInt(b.rank))
+    cards.sort((a, b) => parseInt(a.rank) - parseInt(b.rank))
     let count = 1
     let index = 0
     for (const card of cards) {
-      for(let i = index; i < cards.length-1;i++){
-        if(parseInt(card.rank)-parseInt(cards[i+1].rank) === -1) count++
+      for (let i = index; i < cards.length - 1; i++) {
+        if (parseInt(card.rank) - parseInt(cards[i + 1].rank) === -1) count++
       }
     }
-    if(count === 5) return true
+    if (count === 5) return true
     return false
   }
   isTrips(cards: Array<GameCard>): boolean {
@@ -174,7 +174,7 @@ export class Player {
       cardValues += this.toRank(card.rank)
     }
     if (cardValues > 10) return true;
-    
+
     return false;
   }
 };
