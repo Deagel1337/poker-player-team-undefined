@@ -34,6 +34,10 @@ export class Player {
         this.bet(raise, "fullhouse-raise", betCallback)
       return;
     }
+    if(stack < 300){
+      this.bet(0, "stack to low", betCallback);
+      return;
+    }
     if (minRaise_stack_percent > 0.5 && activePlayers.length > 4) {
       this.bet(0, "fold too high min bet with more than 4 players", betCallback);
       return;
