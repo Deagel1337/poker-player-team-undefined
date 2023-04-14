@@ -68,7 +68,7 @@ export class Player {
       return;
     }
     if (this.isPair(allCards, ownCards) > 0) {
-      this.bet(minRaise + raiseUnit * allCards.length * this.isPair(ownCards), "pair", betCallback)
+      this.bet(minRaise + raiseUnit * allCards.length * this.isPair(allCards, ownCards), "pair", betCallback)
       return;
     }
     if (this.isHighCard(gameState.players[gameState.in_action].hole_cards) === true) {
