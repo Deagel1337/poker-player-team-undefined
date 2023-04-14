@@ -7,7 +7,7 @@ export class Player {
     const stack = gameState.players[gameState.in_action].stack;
     const minRaise_stack_percent = minRaise / stack;
     const activePlayers = gameState.players.filter((p) => p.status == "active");
-    const raiseUnit = 30;
+    const raiseUnit = 50;
 
 
     console.log(`MinRaise: ${minRaise} - Stack: ${stack} - ${minRaise_stack_percent}`)
