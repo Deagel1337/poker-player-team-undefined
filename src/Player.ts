@@ -9,51 +9,66 @@ export class Player {
     console.log(allCards.map((c) => c.rank))
     if (this.isRoyalFlush(allCards) === true) {
       this.bet(stack, "ryoal flush", betCallback)
+      return;
     }
     if (this.isStraightFlush(allCards) === true) {
       this.bet(stack, "straight flush", betCallback)
+      return;
     }
     if (this.isQuads(allCards) === true) {
       this.bet(stack, "quads", betCallback)
+      return;
     }
     if (this.isFullHouse(allCards) === true) {
       let raise = minRaise + stack / 2
       if (raise > stack) {
         this.bet(stack, "fullhouse", betCallback)
+        return;
       }
       else
         this.bet(raise, "fullhouse-raise", betCallback)
+      return;
     }
     if (this.isFlush(allCards) === true) {
-      console.log("Flush")
       let raise = minRaise + stack / 4
-      if (raise > stack) betCallback(stack)
-      else
+      if (raise > stack) {
+        betCallback(stack);
+        return;
+      }
+      else {
         this.bet(raise, "flush-raise", betCallback)
+        return;
+      }
     }
     if (this.isStraight(allCards) === true) {
       this.bet(minRaise + raiseUnit * allCards.length, "straight", betCallback)
+      return;
     }
     if (this.isTrips(allCards) === true) {
-      console.log("trips")
       this.bet(minRaise + 2 * raiseUnit * allCards.length, "trips", betCallback)
+      return;
     }
     if (this.isTwoPair(allCards) === true) {
       betCallback(minRaise + raiseUnit * allCards.length)
       this.bet(minRaise + raiseUnit * allCards.length, "2pair", betCallback)
+      return;
     }
     if (this.isPair(allCards) === true) {
       this.bet(minRaise + raiseUnit * allCards.length, "pair", betCallback)
+      return;
     }
     if (this.isHighCard(gameState.players[gameState.in_action].hole_cards) === true) {
       this.bet(minRaise + raiseUnit * allCards.length, "highcard", betCallback)
+      return;
     }
 
     //Stop losses b/c royal recognition is not implemented
     if (allCards.length >= 4) {
       this.bet(0, "stoploss", betCallback)
+      return;
     }
     this.bet(42, 'N', betCallback)
+    return;
   }
 
   private bet(bet: number, reason: string, betCallback: (bet: number) => void): void {
