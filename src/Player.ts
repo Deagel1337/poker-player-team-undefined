@@ -40,10 +40,10 @@ export class Player {
       this.bet(0, "fold because call is higher than stack", betCallback);
       return;
     }
-    if (minRaise_stack_percent > 0.5 && activePlayers.length > 4) {
-      this.bet(0, "fold too high min bet with more than 4 players", betCallback);
-      return;
-    }
+    // if (minRaise_stack_percent > 0.5 && activePlayers.length > 4) {
+    //   this.bet(0, "fold too high min bet with more than 4 players", betCallback);
+    //   return;
+    // }
     if (this.isFlush(allCards) === true) {
       let raise = call + stack / 4
       if (raise > stack) {
