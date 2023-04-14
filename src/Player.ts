@@ -3,6 +3,7 @@ export class Player {
     const allCards = [...gameState.players[gameState.in_action].hole_cards, ...gameState.community_cards]
     const minRaise = gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
     const stack = gameState.players[gameState.in_action].stack;
+    const raiseUnit  = 20;
 
     console.log(allCards.map((c)=>c.rank))
     if (this.isRoyalFlush(allCards) === true) {
@@ -19,30 +20,30 @@ export class Player {
     }
     if (this.isFullHouse(allCards) === true) {
       console.log("Fullhouse")
-      betCallback(minRaise + 50)
+      betCallback(minRaise + raiseUnit*allCards.length)
     }
     if (this.isFlush(allCards) === true) {
       console.log("Flush")
-      betCallback(minRaise + 50)
+      betCallback(minRaise + raiseUnit*allCards.length)
     }
     if (this.isStraight(allCards) === true) {
       console.log("Straight")
-      betCallback(minRaise + 50)
+      betCallback(minRaise + raiseUnit*allCards.length)
     }
     if (this.isTrips(allCards) === true) {
       console.log("trips")
-      betCallback(minRaise + 50)
+      betCallback(minRaise + raiseUnit*allCards.length)
     }
     if (this.isTwoPair(allCards) === true) {
       console.log("2pair")
-      betCallback(minRaise + 50)
+      betCallback(minRaise + raiseUnit*allCards.length)
     }
     if (this.isPair(allCards) === true) {
       console.log("pair")
-      betCallback(minRaise + 50)
+      betCallback(minRaise + raiseUnit*allCards.length)
     }
     if (this.isHighCard(gameState.players[gameState.in_action].hole_cards) === true) {
-      betCallback(minRaise + 50)
+      betCallback(minRaise + raiseUnit*allCards.length)
     }
 
     //Stop losses b/c royal recognition is not implemented
