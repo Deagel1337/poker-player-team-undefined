@@ -67,7 +67,22 @@ export class Player {
     return false;
   }
   isFullHouse(cards: Array<GameCard>): boolean {
-    return false;
+    if(cards.length < 5) return;
+  // find triple
+    let triple;
+    for (const card of cards) {
+      let possibleTriple = cards.filter((c) => c.rank == card.rank)
+      if(possibleTriple.length == 3){
+        triple = possibleTriple;
+      }
+    }
+    if(!triple) return false;
+    for (const card of cards) {
+      if(cards.filter((c) => c.rank == card.rank && card.rank != triple[0].rank).length == 2)
+        return true;
+    }
+    //find pair
+    return false
   }
   isFlush(cards: Array<GameCard>): boolean {
     return false;
