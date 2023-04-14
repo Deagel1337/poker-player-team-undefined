@@ -187,7 +187,7 @@ export class Player {
     for (const card of cards) {
       if (cards.filter((c) => c.rank == card.rank).length == 3) r = 1;
     }
-    if (r > 0 && !this.isPair(ownCards)) { r = 0.5; }
+    if (r > 0 && this.isPair(cards, ownCards)>0) { r = 0.5; }
     return r;
   }
 
