@@ -206,7 +206,7 @@ export class Player {
 
   isTrips(ownCards: Array<GameCard>, cards: Array<GameCard>): number {
     let r = 0;
-    for (const card of cards) {
+    for (const card of ownCards) {
       if (cards.filter((c) => c.rank == card.rank).length == 3) r = 1;
     }
     if (r > 0 && this.isPair(cards, ownCards) > 0) { r = 0.5; }
