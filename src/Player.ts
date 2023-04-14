@@ -9,7 +9,7 @@ export class Player {
     }
     if (this.isQuads(allCards) === true) {
       betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
-    }
+    } 
     if (this.isFullHouse(allCards) === true) {
       betCallback(gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise + 50)
     }
