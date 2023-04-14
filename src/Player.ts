@@ -7,7 +7,7 @@ export class Player {
     const stack = gameState.players[gameState.in_action].stack;
     const minRaise_stack_percent = minRaise / stack;
     const activePlayers = gameState.players.filter((p) => p.status == "active");
-    const raiseUnit = 50;
+    const raiseUnit = 75;
 
 
     console.log(`MinRaise: ${minRaise} - Stack: ${stack} - ${minRaise_stack_percent}`)
@@ -72,10 +72,17 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length * this.isPair(allCards, ownCards), "pair", betCallback)
       return;
     }
+
+    if(this.isAce(ownCards) && this.isPair(allCards, allCards)==0){
+      this.bet(call, "ace on hand and no pair", betCallback);
+      return;
+    }
+
     if(call > 100){
       this.bet(0, "raise too high", betCallback);
       return;
     }
+
     if (stack < 300 && this.isHighCard(ownCards) < 20) {
       this.bet(0, "stack to low", betCallback);
       return;
@@ -254,6 +261,15 @@ export class Player {
       cardValues += this.toRank(card.rank)
     }
     if (cardValues < 15) return true;
+    return false;
+  }
+
+  isAce(cards: Array<GameCard>): boolean {
+    for (let card of cards) {
+      if (card.rank == "A"){
+        return true
+      }
+    }
     return false;
   }
 };
