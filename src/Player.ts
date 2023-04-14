@@ -34,7 +34,7 @@ export class Player {
         this.bet(raise, "fullhouse-raise", betCallback)
       return;
     }
-    if(stack < 300){
+    if (stack < 300) {
       this.bet(0, "stack to low", betCallback);
       return;
     }
