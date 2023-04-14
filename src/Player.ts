@@ -7,7 +7,7 @@ export class Player {
     const stack = gameState.players[gameState.in_action].stack;
     const minRaise_stack_percent = minRaise / stack;
     const activePlayers = gameState.players.filter((p) => p.status == "active");
-    const raiseUnit = 10;
+    const raiseUnit = 20;
 
 
     console.log(`MinRaise: ${minRaise} - Stack: ${stack} - ${minRaise_stack_percent}`)
@@ -85,7 +85,7 @@ export class Player {
       return;
     }
     if (this.isHighCard(ownCards) > 20) {
-      this.bet(minRaise + raiseUnit * allCards.length, "highcard", betCallback)
+      this.bet(call, "highcard", betCallback)
       return;
     }
 
