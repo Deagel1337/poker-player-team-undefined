@@ -58,8 +58,9 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length, "straight", betCallback)
       return;
     }
-    if (this.isTrips(ownCards, allCards) === true) {
-      this.bet(minRaise + 2 * raiseUnit * allCards.length, "trips", betCallback)
+    const trips = this.isTrips(ownCards, allCards)
+    if (trips !== 0) {
+      this.bet(minRaise + 2 * raiseUnit * allCards.length * trips, "trips", betCallback)
       return;
     }
     if (this.isTwoPair(allCards, ownCards) === true) {
@@ -181,12 +182,13 @@ export class Player {
     return false
   }
 
-  isTrips(ownCards: Array<GameCard>, cards: Array<GameCard>): boolean {
-    if (!this.isPair(ownCards)) { return false; }
+  isTrips(ownCards: Array<GameCard>, cards: Array<GameCard>): number {
+    let r = 0;
     for (const card of cards) {
-      if (cards.filter((c) => c.rank == card.rank).length == 3) return true;
+      if (cards.filter((c) => c.rank == card.rank).length == 3) r = 1;
     }
-    return false;
+    if (r > 0 && !this.isPair(ownCards)) { r = 0.5; }
+    return r;
   }
 
   isTwoPair(cards: Array<GameCard>, ownCards: Array<GameCard>): boolean {
