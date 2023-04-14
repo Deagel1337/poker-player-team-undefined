@@ -79,7 +79,27 @@ export class Player {
     return false;
   }
   isStraightFlush(cards: Array<GameCard>): boolean {
-    return false;
+    cards.sort((a,b)=>parseInt(a.rank)-parseInt(b.rank))
+  let isStraight: boolean = false
+  for (const card of cards) {
+    if(cards.filter((c)=> card.suit === c.suit).length === 5){
+      isStraight = true
+    }
+  }
+  if(!isStraight) return false
+  let count = 1
+  let index = 0
+  for (const card of cards) {
+    for(let i = index; i < cards.length-1;i++)
+    {
+      if((parseInt(card.rank)-parseInt(cards[i+1].rank)) === -1){
+        count++
+      }
+    }
+    index++
+  }
+  if(count===5) return true
+  return false
   }
   isQuads(cards: Array<GameCard>): boolean {
     for (const card of cards) {
