@@ -31,6 +31,9 @@ export class Player {
     if (this.isTrips(allCards) === true) {
       betCallback(minRaise + 50)
     }
+    if (this.isPair(allCards) === true) {
+      betCallback(minRaise + 50)
+    }
     if (this.isHighCard(allCards) === true) {
       betCallback(minRaise + 50)
     }
