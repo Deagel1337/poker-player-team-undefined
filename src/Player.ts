@@ -79,6 +79,10 @@ export class Player {
       this.bet(0, "stack to low", betCallback);
       return;
     }
+    if(stack > 1400){
+      this.bet(0, "stack higher than the risk", betCallback);
+
+    }
     if (this.isHighCard(ownCards) > 20) {
       this.bet(minRaise + raiseUnit * allCards.length, "highcard", betCallback)
       return;
