@@ -5,36 +5,43 @@ export class Player {
     const stack = gameState.players[gameState.in_action].stack;
 
     if (this.isRoyalFlush(allCards) === true) {
+      console.log("Royal Flush")
       betCallback(stack)
     }
     if (this.isStraightFlush(allCards) === true) {
+      console.log("Straight Flush")
       betCallback(stack)
     }
     if (this.isQuads(allCards) === true) {
+      console.log("Quads")
       betCallback(stack)
     }
     if (this.isFullHouse(allCards) === true) {
+      console.log("Fullhouse")
       betCallback(minRaise + 50)
     }
     if (this.isFlush(allCards) === true) {
+      console.log("Flush")
       betCallback(minRaise + 50)
     }
     if (this.isStraight(allCards) === true) {
+      console.log("Straight")
       betCallback(minRaise + 50)
     }
     if (this.isTrips(allCards) === true) {
+      console.log("trips")
       betCallback(minRaise + 50)
     }
     if (this.isTwoPair(allCards) === true) {
-      betCallback(minRaise + 50)
-    }
-    if (this.isTrips(allCards) === true) {
+      console.log("2pair")
       betCallback(minRaise + 50)
     }
     if (this.isPair(allCards) === true) {
+      console.log("pair")
       betCallback(minRaise + 50)
     }
     if (this.isHighCard(allCards) === true) {
+      console.log("highcard")
       betCallback(minRaise + 50)
     }
 
