@@ -2,15 +2,16 @@ export class Player {
   public betRequest(gameState: GameState, betCallback: (bet: number) => void): void {
     const allCards = gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards);
     const minRaise = gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
-    
+    const stack = gameState.players[gameState.in_action].stack;
+
     if (this.isRoyalFlush(allCards) === true) {
-      betCallback(minRaise + 50)
+      betCallback(stack)
     }
     if (this.isStraightFlush(allCards) === true) {
-      betCallback(minRaise + 50)
+      betCallback(stack)
     }
     if (this.isQuads(allCards) === true) {
-      betCallback(minRaise + 50)
+      betCallback(stack)
     }
     if (this.isFullHouse(allCards) === true) {
       betCallback(minRaise + 50)
