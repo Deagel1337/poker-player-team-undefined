@@ -2,17 +2,14 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Player } from './Player';
-import * as morgan from 'morgan';
 
 const VERSION = "Default TypeScript folding player";
 
 const app = express();
 const player = new Player();
-const noop = () => {};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('dev', { stream: { write: noop } }));
 
 app.get('/', ({}, res) => res.send(200, 'OK'));
 
