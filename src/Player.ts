@@ -71,6 +71,10 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length * this.isPair(allCards, ownCards), "pair", betCallback)
       return;
     }
+    if(minRaise > 100){
+      this.bet(0, "raise too high", betCallback);
+      return;
+    }
     if (stack < 300 && this.isHighCard(ownCards) < 20) {
       this.bet(0, "stack to low", betCallback);
       return;
