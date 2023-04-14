@@ -89,7 +89,8 @@ export class Player {
     }
     if(!triple) return false;
     for (const card of cards) {
-      if(cards.filter((c) => c.rank == card.rank && card.rank != triple[0].rank).length == 2)
+      if(card.rank == triple[0].rank) continue;
+      if(cards.filter((c) => c.rank == card.rank).length == 2)
         return true;
     }
     //find pair
