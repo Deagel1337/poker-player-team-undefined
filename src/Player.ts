@@ -38,7 +38,7 @@ export type GamePlayer = {
   stack: number,
   status: string,
   bet: number,
-  hole_cards: Array<any>,
+  hole_cards: Array<GameCard>,
   version: string,
   id: number
 }
