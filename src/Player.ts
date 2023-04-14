@@ -135,7 +135,10 @@ export class Player {
     return false
   }
   isFlush(cards: Array<GameCard>): boolean {
-    return false;
+    for (const card of cards) {
+      if(cards.filter((c)=> card.suit === c.suit).length === 5) return true
+    }
+    return false
   }
   isStraight(cards: Array<GameCard>): boolean {
     return false;
