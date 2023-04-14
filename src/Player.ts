@@ -5,7 +5,7 @@ export class Player {
     const stack = gameState.players[gameState.in_action].stack;
     const minRaise_stack_percent = minRaise / stack;
     const activePlayers = gameState.players.filter((p) => p.status == "active");
-    const raiseUnit = 30;
+    const raiseUnit = 10;
 
 
     console.log(gameState.players[gameState.in_action].hole_cards.map((c) => c.rank))
@@ -57,7 +57,6 @@ export class Player {
       return;
     }
     if (this.isTwoPair(allCards) === true) {
-      betCallback(minRaise + raiseUnit * allCards.length)
       this.bet(minRaise + raiseUnit * allCards.length, "2pair", betCallback)
       return;
     }
