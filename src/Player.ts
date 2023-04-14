@@ -205,7 +205,7 @@ export class Player {
     for (const card of ownCards) {
       const possiblePair = cards.filter((c) => c.rank == card.rank)
       if (possiblePair.length == 2) {
-        const highcard = this.isHighCard(cards);
+        const highcard = this.isHighCard(ownCards);
         if (highcard>0)
           return 1
       }
