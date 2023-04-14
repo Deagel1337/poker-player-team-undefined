@@ -61,10 +61,10 @@ export class Player {
   }
 
   toRank(cardRank: string): number {
-    if (cardRank == "J") return 10;
-    if (cardRank == "Q") return 11;
-    if (cardRank == "K") return 12;
-    if (cardRank == "A") return 13;
+    if (cardRank == "J") return 10*2;
+    if (cardRank == "Q") return 11*2;
+    if (cardRank == "K") return 12*2;
+    if (cardRank == "A") return 13*2;
     return parseInt(cardRank)
   }
 
