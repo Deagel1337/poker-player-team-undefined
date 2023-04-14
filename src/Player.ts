@@ -3,10 +3,14 @@ export class Player {
     const allCards = gameState.community_cards.concat(...gameState.players[gameState.in_action].hole_cards);
     const minRaise = gameState.current_buy_in - gameState.players[gameState.in_action].bet + gameState.minimum_raise;
     const stack = gameState.players[gameState.in_action].stack;
+    const minRaise_stack_percent = minRaise / stack;
+    const activePlayers = gameState.players.filter((p) => p.status == "active");
     const raiseUnit = 30;
+
 
     console.log(gameState.players[gameState.in_action].hole_cards.map((c) => c.rank))
     console.log(allCards.map((c) => c.rank))
+
     if (this.isRoyalFlush(allCards) === true) {
       this.bet(stack, "ryoal flush", betCallback)
       return;
@@ -27,6 +31,10 @@ export class Player {
       }
       else
         this.bet(raise, "fullhouse-raise", betCallback)
+      return;
+    }
+    if (minRaise_stack_percent > 0.5 && activePlayers.length > 4) {
+      this.bet(0, "fold too high min bet with more than 4 players", betCallback);
       return;
     }
     if (this.isFlush(allCards) === true) {
