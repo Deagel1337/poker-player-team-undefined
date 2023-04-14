@@ -71,7 +71,7 @@ export class Player {
       this.bet(minRaise + raiseUnit * allCards.length * this.isPair(allCards, ownCards), "pair", betCallback)
       return;
     }
-    if(minRaise > 100){
+    if(gameState.current_buy_in - gameState.players[gameState.in_action].bet > 100){
       this.bet(0, "raise too high", betCallback);
       return;
     }
