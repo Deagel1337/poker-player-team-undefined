@@ -170,10 +170,10 @@ export class Player {
     return false;
   }
   isTwoPair(cards: Array<GameCard>): boolean {
-    let pairs = 0;
+    let pairs = new Array<string>();
     for (const card of cards) {
-      if (cards.filter((c) => c.rank == card.rank).length == 2) { pairs++; }
-      if (pairs > 1) { return true }
+      if (cards.filter((c) => c.rank == card.rank).length == 2 && pairs.filter((c) => c == card.rank).length == 0) { pairs.push(card.rank); }
+      if (pairs.length > 1) { return true }
     }
     return false
   }
