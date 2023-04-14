@@ -7,16 +7,13 @@ export class Player {
 
     console.log(allCards.map((c)=>c.rank))
     if (this.isRoyalFlush(allCards) === true) {
-      console.log("Royal Flush")
-      betCallback(stack)
+      this.bet(stack, "ryoal flush", betCallback)
     }
     if (this.isStraightFlush(allCards) === true) {
-      console.log("Straight Flush")
-      betCallback(stack)
+      this.bet(stack, "straight flush", betCallback)
     }
     if (this.isQuads(allCards) === true) {
-      console.log("Quads")
-      betCallback(stack)
+      this.bet(stack, "quads", betCallback)
     }
     if (this.isFullHouse(allCards) === true) {
       console.log("Fullhouse")
@@ -31,33 +28,39 @@ export class Player {
       if( raise > stack) betCallback(stack)
       else 
         betCallback(raise)
+      // this.bet(minRaise + raiseUnit*allCards.length, "fullhouse", betCallback)
+    }
+    if (this.isFlush(allCards) === true) {
+      this.bet(minRaise + raiseUnit*allCards.length, "flush", betCallback)
     }
     if (this.isStraight(allCards) === true) {
-      console.log("Straight")
-      betCallback(minRaise + raiseUnit*allCards.length)
+      this.bet(minRaise + raiseUnit*allCards.length, "straight", betCallback)
     }
     if (this.isTrips(allCards) === true) {
       console.log("trips")
       betCallback(minRaise + 2*raiseUnit*allCards.length)
+      // this.bet(minRaise + raiseUnit*allCards.length, "trips", betCallback)
     }
     if (this.isTwoPair(allCards) === true) {
-      console.log("2pair")
       betCallback(minRaise + raiseUnit*allCards.length)
+      this.bet(minRaise + raiseUnit*allCards.length, "2pair", betCallback)
     }
     if (this.isPair(allCards) === true) {
-      console.log("pair")
-      betCallback(minRaise + raiseUnit*allCards.length)
+      this.bet(minRaise + raiseUnit*allCards.length, "pair", betCallback)
     }
     if (this.isHighCard(gameState.players[gameState.in_action].hole_cards) === true) {
-      betCallback(minRaise + raiseUnit*allCards.length)
+      this.bet(minRaise + raiseUnit*allCards.length, "highcard", betCallback)
     }
 
     //Stop losses b/c royal recognition is not implemented
     if(allCards.length >= 4){
-      betCallback(0)
+     this.bet(0, "stoploss", betCallback)
     }
+  }
 
-
+  private bet(bet: number, reason: string, betCallback: (bet: number) => void): void{
+    console.log(`Bet: ${bet} - Reason: ${reason}`);
+    betCallback(bet);
   }
 
   public showdown(gameState: {
