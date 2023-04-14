@@ -25,14 +25,11 @@ export class Player {
     }
     if (this.isFlush(allCards) === true) {
       console.log("Flush")
-      let raise = minRaise + stack/2
+      let raise = minRaise + stack/4
       if( raise > stack) betCallback(stack)
       else 
         betCallback(raise)
       // this.bet(minRaise + raiseUnit*allCards.length, "fullhouse", betCallback)
-    }
-    if (this.isFlush(allCards) === true) {
-      this.bet(minRaise + raiseUnit*allCards.length, "flush", betCallback)
     }
     if (this.isStraight(allCards) === true) {
       this.bet(minRaise + raiseUnit*allCards.length, "straight", betCallback)
